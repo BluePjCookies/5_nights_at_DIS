@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="11" height="8" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="9">
+ <tileset firstgid="1" source="environment/furniture pack grey outline.tsx"/>
+ <tileset firstgid="695" source="environment/floor and walls spritesheet black outline.tsx"/>
+ <tileset firstgid="695" source="environment/output_scaled.tsx"/>
+ <tileset firstgid="836" source="Sprite/chibi-layered.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="11" height="8">
+  <data encoding="csv">
+744,763,763,763,763,763,763,763,761,761,754,
+744,763,763,763,763,763,763,763,761,761,754,
+744,763,763,763,763,763,763,763,761,761,754,
+744,763,761,763,763,763,763,763,761,761,754,
+744,763,761,763,763,763,763,763,761,761,754,
+744,763,763,763,763,763,763,763,761,761,754,
+744,763,763,763,763,763,763,763,761,761,754,
+835,835,835,835,835,835,835,835,835,835,835
+</data>
+ </layer>
+ <layer id="3" name="Tile Layer 2" width="11" height="8">
+  <data encoding="csv">
+0,0,0,158,159,0,158,159,0,0,0,
+30,87,88,208,209,694,208,209,87,88,0,
+67,124,125,426,0,0,426,0,124,125,0,
+0,0,0,0,0,0,0,0,0,0,0,
+281,0,0,0,0,0,0,0,0,0,0,
+318,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="3" name="Bed" x="17" y="18" width="30.3333" height="28.3333">
+   <properties>
+    <property name="bed">if player comes here they sleep
+</property>
+   </properties>
+  </object>
+  <object id="4" name="Bed" x="128.667" y="17.667" width="29.6667" height="30.6667">
+   <properties>
+    <property name="bed" value="isbed"/>
+   </properties>
+  </object>
+  <object id="7" name="Player" gid="838" x="84" y="77.667" width="16" height="16"/>
+  <object id="8" name="Door" x="2" y="66.667" width="13.3333" height="27.6667"/>
+ </objectgroup>
+</map>
