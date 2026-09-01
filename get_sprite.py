@@ -1,7 +1,7 @@
 import pygame
 # Load spritesheet
 spritesheet = pygame.image.load(
-    "/Users/Joshua/Project3/assets/Sprite/chibi-layered copy.png"
+    "assets/Sprite/chibi-layered.png"
 ).convert_alpha()
 
 
