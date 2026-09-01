@@ -9,32 +9,76 @@ class Player:
         from get_sprite import player_images
         self.images = player_images
         self.direction = "down"
-
+        self.status = "awake"
+        self.tmx_data = pytmx.load_pygame(
+                    "assets/prototype.tmx"
+                )
         self.rect = self.images[self.direction].get_rect(
             topleft=(x, y)
         )
 
-        self.speed = 3
+        self.speed = 1
+        self.is_collide = False
 
     def handle_movement(self):
         keys = pygame.key.get_pressed()
+        if self.handle_collision(keys):
+
+            if keys[pygame.K_LEFT] and self.rect.x > 0:
+                self.rect.x -= self.speed
+                self.direction = "left"
+
+            elif keys[pygame.K_RIGHT] and self.rect.x < 160:
+                self.rect.x += self.speed
+                self.direction = "right"
+
+            elif keys[pygame.K_UP] and self.rect.y > 0:
+                self.rect.y -= self.speed
+                self.direction = "up"
+
+            elif keys[pygame.K_DOWN] and self.rect.y < 100:
+                self.rect.y += self.speed
+                self.direction = "down"
+
+    def handle_collision(self, keys):
+        player_rect = self.rect
+        x = self.rect.x
+        y = self.rect.y
 
         if keys[pygame.K_LEFT]:
-            self.rect.x -= self.speed
-            self.direction = "left"
-
+            x -= self.speed
         elif keys[pygame.K_RIGHT]:
-            self.rect.x += self.speed
-            self.direction = "right"
-
+            x += self.speed
         elif keys[pygame.K_UP]:
-            self.rect.y -= self.speed
-            self.direction = "up"
-
+            y -= self.speed
         elif keys[pygame.K_DOWN]:
-            self.rect.y += self.speed
-            self.direction = "down"
+            y += self.speed
+        
+        player_rect = pygame.Rect(
+            x,
+            y,
+            player_rect.width,
+            player_rect.height
+        )
 
+        for obj in self.tmx_data.get_layer_by_name("Object Layer 1"):
+            collision_rect = pygame.Rect(
+                                obj.x,
+                                obj.y,
+                                obj.width,
+                                obj.height
+                            )
+            if obj.name in ["Chair", "Bin", "Door", "Table"]:
+                if player_rect.colliderect(collision_rect):
+                    return False
+            if obj.name == "Bed":
+                if player_rect.colliderect(collision_rect):
+                    self.status = "sleeping"
+                else:
+                    self.status = "awake"
+                
+        return True
+        
     def draw(self, screen):
         screen.blit(
             self.images[self.direction],
@@ -96,7 +140,6 @@ class Game:
     def draw_map(self):
 
         for layer in self.tmx_data.visible_layers:
-
             if isinstance(layer, pytmx.TiledTileLayer):
 
                 for x, y, image in layer.tiles():
