@@ -64,7 +64,7 @@ class Game:
 
         # Load map
         self.tmx_data = pytmx.load_pygame(
-            "assets/prototype copy.tmx"
+            "assets/prototype.tmx"
         )
 
         # Create player from Tiled object
